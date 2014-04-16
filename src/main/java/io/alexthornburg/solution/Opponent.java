@@ -91,7 +91,7 @@ public class Opponent {
 
     public List<int[]> getOpenSpots() {
         List<int[]> nextMoves = new ArrayList<int[]>();
-        if (hasWon(goodGuy) || hasWon(badGuy)) {
+        if (isAWinner(goodGuy) || isAWinner(badGuy)) {
             return nextMoves;
         }
 
@@ -175,7 +175,7 @@ public class Opponent {
         return score;
     }
 
-    public boolean hasWon(String player) {
+    public boolean isAWinner(String player) {
         int pattern = Integer.parseInt("000000000",2);
         for (int row = 0; row < 3; ++row) {
             for (int col = 0; col < 3; ++col) {

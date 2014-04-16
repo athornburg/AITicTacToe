@@ -17,7 +17,6 @@ public class GameBoard {
     private Row row1 = new Row();
     private Row row2 = new Row();
     private Row row3 = new Row();
-    private boolean draw;
     private static final String X ="X";
     private static final String Y = "Y";
     private String status = "in progress";
@@ -34,46 +33,6 @@ public class GameBoard {
 
     public static GameBoard getInstance() {
         return board;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public boolean isDraw() {
-        return draw;
-    }
-
-    public void setDraw(boolean draw) {
-        this.draw = draw;
-    }
-
-    public Row getRow1() {
-        return row1;
-    }
-
-    public void setRow1(Row row1) {
-        this.row1 = row1;
-    }
-
-    public Row getRow2() {
-        return row2;
-    }
-
-    public void setRow2(Row row2) {
-        this.row2 = row2;
-    }
-
-    public Row getRow3() {
-        return row3;
-    }
-
-    public void setRow3(Row row3) {
-        this.row3 = row3;
     }
 
     public boolean isWinner(String player){
@@ -266,6 +225,35 @@ public class GameBoard {
             results.add(8);
         }
         return results;
+    }
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public Row getRow1() {
+        return row1;
+    }
+
+    public void setRow1(Row row1) {
+        this.row1 = row1;
+    }
+
+    public Row getRow2() {
+        return row2;
+    }
+
+    public void setRow2(Row row2) {
+        this.row2 = row2;
+    }
+
+    public Row getRow3() {
+        return row3;
+    }
+
+    public void setRow3(Row row3) {
+        this.row3 = row3;
     }
 
 
