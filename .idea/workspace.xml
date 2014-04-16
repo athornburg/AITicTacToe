@@ -7,7 +7,7 @@
     <file path="/TicTacToe.java" changelist="331c17a5-9613-4658-8744-13cfea3c7b40" time="1397361053337" ignored="false" />
     <file path="/Board.java" changelist="331c17a5-9613-4658-8744-13cfea3c7b40" time="1397587214006" ignored="false" />
     <file path="/Row.java" changelist="331c17a5-9613-4658-8744-13cfea3c7b40" time="1397180927785" ignored="false" />
-    <file path="/pom.xml" changelist="331c17a5-9613-4658-8744-13cfea3c7b40" time="1397328337611" ignored="false" />
+    <file path="/pom.xml" changelist="331c17a5-9613-4658-8744-13cfea3c7b40" time="1397606655624" ignored="false" />
     <file path="/fragment.java" changelist="331c17a5-9613-4658-8744-13cfea3c7b40" time="1397329050112" ignored="false" />
     <file path="/Opponent.java" changelist="331c17a5-9613-4658-8744-13cfea3c7b40" time="1397361822359" ignored="false" />
     <file path="/OpponentHard.java" changelist="331c17a5-9613-4658-8744-13cfea3c7b40" time="1397234000156" ignored="false" />
@@ -96,13 +96,22 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Opponent.java" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="Opponent.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/io/alexthornburg/solution/Opponent.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="136" column="54" selection-start="4016" selection-end="4016" vertical-scroll-proportion="5.519663">
+                <state line="136" column="54" selection-start="4016" selection-end="4016" vertical-scroll-proportion="0.0">
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="pom.xml" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/pom.xml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="46" column="40" selection-start="1618" selection-end="1618" vertical-scroll-proportion="0.6299342">
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -114,7 +123,7 @@
           <file leaf-file-name="AITest.java" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/test/java/AITest.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="85" column="34" selection-start="2703" selection-end="2703" vertical-scroll-proportion="3.3286517">
+                <state line="85" column="34" selection-start="2703" selection-end="2703" vertical-scroll-proportion="1.9490131">
                   <folding />
                 </state>
               </provider>
@@ -147,11 +156,11 @@
         <option value="$PROJECT_DIR$/src/main/java/io/alexthornburg/solution/Row.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/alexthornburg/solution/OpponentHard.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/alexthornburg/solution/MiniMax.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/io/alexthornburg/solution/Opponent.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/alexthornburg/solution/TicTacToe.java" />
         <option value="$PROJECT_DIR$/src/test/java/AITest.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/alexthornburg/solution/Board.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -523,7 +532,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Amazon EC2" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19305673" sideWeight="0.6117103" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3882897" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3882897" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -663,20 +672,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="88" selection-start="667" selection-end="667" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/src.zip!/java/util/Random.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="387" column="0" selection-start="14939" selection-end="14939" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/alexthornburg/solution/Row.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="12" selection-start="508" selection-end="509" vertical-scroll-proportion="0.0">
@@ -693,7 +688,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/AITest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="34" selection-start="2703" selection-end="2703" vertical-scroll-proportion="3.3286517">
+        <state line="85" column="34" selection-start="2703" selection-end="2703" vertical-scroll-proportion="1.9490131">
           <folding />
         </state>
       </provider>
@@ -707,10 +702,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/alexthornburg/solution/Opponent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="136" column="54" selection-start="4016" selection-end="4016" vertical-scroll-proportion="5.519663">
+        <state line="136" column="54" selection-start="4016" selection-end="4016" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="40" selection-start="1618" selection-end="1618" vertical-scroll-proportion="0.6299342">
+          <folding />
         </state>
       </provider>
     </entry>
