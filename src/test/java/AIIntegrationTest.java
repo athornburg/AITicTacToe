@@ -11,7 +11,7 @@ import static junit.framework.Assert.assertNotSame;
  * Date: 4/12/14
  * Time: 1:42 PM
  */
-public class AITest {
+public class AIIntegrationTest {
     Board board;
     Opponent opponent;
     @Before

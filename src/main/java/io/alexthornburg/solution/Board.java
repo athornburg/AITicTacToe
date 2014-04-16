@@ -156,41 +156,6 @@ public class Board {
 
     }
 
-    public void undoMove(int move){
-        processMove(move,EMPTY_VALUE);
-    }
-
-    public Board getClone(){
-       Board board = new Board();
-       board.setRow1(row1);
-       board.setRow2(row2);
-       board.setRow3(row3);
-       return board;
-    }
-    public List<int[]> getMovesAsGrid(){
-        List<int[]> gridMoves = new ArrayList<int[]>();
-        if(row1.getA().equals("_")){
-            gridMoves.add(new int[]{0,0});
-        }else if(row1.getB().equals("_")){
-            gridMoves.add(new int[]{0,1});
-        }else if(row1.getC().equals("_")){
-            gridMoves.add(new int[]{0,2});
-        }else if(row2.getA().equals("_")){
-            gridMoves.add(new int[]{1,0});
-        }else if(row2.getB().equals("_")){
-            gridMoves.add(new int[]{1,1});
-        }else if(row2.getC().equals("_")){
-            gridMoves.add(new int[]{1,2});
-        }else if(row3.getA().equals("_")){
-            gridMoves.add(new int[]{2,0});
-        }else if(row3.getB().equals("_")){
-            gridMoves.add(new int[]{2,1});
-        }else if(row3.getC().equals("_")){
-            gridMoves.add(new int[]{2,2});
-        }
-        return gridMoves;
-    }
-
     public String[][] getBoardAs2D(){
         String[][] results = new String[3][3];
         results[0][0] = row1.getA();
@@ -224,7 +189,7 @@ public class Board {
         return result;
     }
 
-    private boolean allSquaresOccupied() {
+    public boolean full() {
         String[]board = getBoardAsArray();
         int moves = 0;
         for (int i = 0; i < 9; i++) {
@@ -235,7 +200,6 @@ public class Board {
     }
 
     private boolean checkWin(String xOrO, String a, String b, String c) {
-        String[] board = getBoardAsArray();
         return (a.equals(xOrO) &&
                 b.equals(xOrO) &&
                 c.equals(xOrO));
@@ -272,20 +236,12 @@ public class Board {
     public void update(String xOrO) {
         if (checkRow(xOrO) || checkColumn(xOrO) || checkDiagonal(xOrO)) {
             status = xOrO +" wins!";
-        } else if (allSquaresOccupied()) {
+        } else if (full()) {
             status = "draw";
         } else {
             status = "in progress";
         }
 
-    }
-
-    public String getBadGuy(String player){
-        if(player.equals(X)){
-            return Y;
-        }else{
-            return X;
-        }
     }
 
     public ArrayList<Integer> listAvailableMoves(){
