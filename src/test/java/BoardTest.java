@@ -33,6 +33,14 @@ public class BoardTest {
     }
 
     @Test
+    public void testStatus(){
+        board.initBoard();
+        board.processMove(0, "X");
+        assertEquals("in progress",board.getStatus());
+        board.initBoard();
+    }
+
+    @Test
     public void testBoardAsArray(){
         String[] array = board.getBoardAsArray();
         for(int i =0;i<array.length;i++){

@@ -1,5 +1,6 @@
 import io.alexthornburg.solution.GameBoard;
 import io.alexthornburg.solution.Opponent;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -126,6 +127,11 @@ public class AIIntegrationTest {
         long time = end-start;
         System.out.println("10,000 AI players played in "+time+" milliseconds");
 
+    }
+
+    @After
+    public void clear(){
+        board.initBoard();
     }
 
 }
