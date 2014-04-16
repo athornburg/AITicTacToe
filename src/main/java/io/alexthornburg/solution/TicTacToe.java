@@ -8,10 +8,10 @@ import java.util.Scanner;
 public class TicTacToe {
 
     public static void main(String args[]){
-        Board example = Board.getInstance();
+        GameBoard example = GameBoard.getInstance();
         System.out.println("Positions: \n"+example.exampleBoard().toString());
 
-        Board board = Board.getInstance();
+        GameBoard board = GameBoard.getInstance();
         board.initBoard();
 
         Opponent opponent = new Opponent("O","X");
@@ -95,7 +95,7 @@ public class TicTacToe {
 
     }
 
-    public static void userMakePlay(Board board, Scanner sc){
+    public static void userMakePlay(GameBoard board, Scanner sc){
         System.out.println("Enter a position:");
         String position = sc.nextLine();
         boolean validMove;
@@ -112,7 +112,7 @@ public class TicTacToe {
 
     }
 
-    public static void computerMakePlay(Board board, Opponent opponent){
+    public static void computerMakePlay(GameBoard board, Opponent opponent){
 
         board.processMove(opponent.getBestMove(board),"O");
         System.out.println(board.toString());

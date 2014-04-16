@@ -1,4 +1,4 @@
-import io.alexthornburg.solution.Board;
+import io.alexthornburg.solution.GameBoard;
 import io.alexthornburg.solution.Opponent;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,11 +12,11 @@ import static junit.framework.Assert.assertNotSame;
  * Time: 1:42 PM
  */
 public class AIIntegrationTest {
-    Board board;
+    GameBoard board;
     Opponent opponent;
     @Before
     public void setup(){
-       board = Board.getInstance();
+       board = GameBoard.getInstance();
        opponent = new Opponent("O","X");
        board.initBoard();
 

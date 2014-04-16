@@ -11,8 +11,8 @@ import java.util.List;
  * Date: 4/10/14
  * Time: 11:59 AM
  */
-public class Board {
-    private static final Board board;
+public class GameBoard {
+    private static final GameBoard board;
     private static final String EMPTY_VALUE = "_";
     private Row row1 = new Row();
     private Row row2 = new Row();
@@ -24,15 +24,15 @@ public class Board {
 
     static {
         try {
-            board = new Board();
+            board = new GameBoard();
         } catch (Exception e) {
             throw new RuntimeException("Error creatin board", e);
         }
     }
 
-    private Board(){}
+    private GameBoard(){}
 
-    public static Board getInstance() {
+    public static GameBoard getInstance() {
         return board;
     }
 
@@ -77,7 +77,7 @@ public class Board {
     }
 
     public boolean isWinner(String player){
-        if(status.equals(player)) return true;
+        if(status.equals(player+ " wins!")) return true;
         return false;
     }
 
@@ -87,7 +87,7 @@ public class Board {
         return FlipTableConverters.fromIterable(board, Row.class);
     }
 
-    public Board exampleBoard(){
+    public GameBoard exampleBoard(){
         row1.setA("A1");
         row1.setB("B1");
         row1.setC("C1");

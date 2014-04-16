@@ -1,5 +1,7 @@
-import io.alexthornburg.solution.Board;
+import io.alexthornburg.solution.GameBoard;
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
@@ -10,16 +12,16 @@ import static junit.framework.Assert.assertTrue;
  * Time: 7:51 PM
  */
 public class BoardTest {
-    Board board;
+    GameBoard board;
 
     @Before
     public void getBoard(){
-       board = Board.getInstance();
+       board = GameBoard.getInstance();
     }
 
+    @Test
     public void testInit(){
-        board.initBoard();
-        assertEquals("_",board.getRow1().getA());
+        assertEquals("_", board.getRow1().getA());
         assertEquals("_",board.getRow1().getB());
         assertEquals("_",board.getRow1().getC());
         assertEquals("_",board.getRow2().getA());
@@ -30,11 +32,7 @@ public class BoardTest {
         assertEquals("_",board.getRow3().getC());
     }
 
-    public void testMove(){
-        fillBoardWithX();
-        board.initBoard();
-    }
-
+    @Test
     public void testBoardAsArray(){
         String[] array = board.getBoardAsArray();
         for(int i =0;i<array.length;i++){
@@ -42,6 +40,7 @@ public class BoardTest {
         }
     }
 
+    @Test
     public void testBoardAs2DArray(){
         String[][] array = board.getBoardAs2D();
         for(int i =0;i<array.length;i++){
@@ -51,41 +50,22 @@ public class BoardTest {
         }
     }
 
+    @Test
     public void testWin(){
-        board.processMove(0,"X");
-        assertEquals("X",board.getRow1().getA());
-        board.processMove(1,"X");
-        assertEquals("X",board.getRow1().getB());
-        board.processMove(2,"X");
-        assertEquals("X wins!",board.getStatus());
+        board.initBoard();
+        board.processMove(0, "X");
+        assertEquals("X", board.getRow1().getA());
+        board.processMove(1, "X");
+        assertEquals("X", board.getRow1().getB());
+        board.processMove(2, "X");
+        assertEquals("X wins!", board.getStatus());
+        assertTrue(board.isWinner("X"));
         board.initBoard();
     }
 
-    public void testFull(){
-        fillBoardWithX();
-        assertTrue(board.full());
-
-    }
-
-    public void fillBoardWithX(){
-        board.processMove(0,"X");
-        assertEquals("X",board.getRow1().getA());
-        board.processMove(1,"X");
-        assertEquals("X",board.getRow1().getB());
-        board.processMove(2,"X");
-        assertEquals("X",board.getRow1().getC());
-        board.processMove(3,"X");
-        assertEquals("X",board.getRow2().getA());
-        board.processMove(4,"X");
-        assertEquals("X",board.getRow2().getB());
-        board.processMove(5,"X");
-        assertEquals("X",board.getRow2().getC());
-        board.processMove(6,"X");
-        assertEquals("X",board.getRow3().getA());
-        board.processMove(7,"X");
-        assertEquals("X",board.getRow3().getB());
-        board.processMove(8,"X");
-        assertEquals("X",board.getRow3().getC());
+    @After
+    public void clear(){
+        board.initBoard();
     }
 
 

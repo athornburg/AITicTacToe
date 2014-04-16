@@ -11,10 +11,17 @@ import java.util.Random;
  */
 public class Opponent {
     private boolean hardMode;
-    private Board board;
+    private GameBoard board;
     protected String[][] cells;
     private String goodGuy ="0";
     private String badGuy = "X";
+    public int[] winningCombos = {
+            Integer.parseInt("111000000",2), Integer.parseInt("000111000",2),
+            Integer.parseInt("000000111",2),
+            Integer.parseInt("100100100",2), Integer.parseInt("010010010",2),
+            Integer.parseInt("001001001",2),
+            Integer.parseInt("100010001",2), Integer.parseInt("001010100",2)
+    };
 
     public Opponent(String goodGuy,String badGuy){
         this.goodGuy = goodGuy;
@@ -23,7 +30,7 @@ public class Opponent {
 
 
     public int[] prunedMiniMax(String maximizingPlayer, int alpha, int beta,int depth) {
-        List<int[]> nextMoves = getAvailableMoves();
+        List<int[]> nextMoves = getOpenSpots();
 
         int score;
         int bestRow = -1;
@@ -62,7 +69,7 @@ public class Opponent {
     }
 
 
-    public int getBestMove(Board board) {
+    public int getBestMove(GameBoard board) {
         this.board = board;
         if(hardMode){
             cells = board.getBoardAs2D();
@@ -82,7 +89,7 @@ public class Opponent {
         }
     }
 
-    public List<int[]> getAvailableMoves() {
+    public List<int[]> getOpenSpots() {
         List<int[]> nextMoves = new ArrayList<int[]>();
         if (hasWon(goodGuy) || hasWon(badGuy)) {
             return nextMoves;
@@ -168,14 +175,6 @@ public class Opponent {
         return score;
     }
 
-    public int[] winners = {
-            Integer.parseInt("111000000",2), Integer.parseInt("000111000",2),
-            Integer.parseInt("000000111",2),
-            Integer.parseInt("100100100",2), Integer.parseInt("010010010",2),
-            Integer.parseInt("001001001",2),
-            Integer.parseInt("100010001",2), Integer.parseInt("001010100",2)
-    };
-
     public boolean hasWon(String player) {
         int pattern = Integer.parseInt("000000000",2);
         for (int row = 0; row < 3; ++row) {
@@ -185,7 +184,7 @@ public class Opponent {
                 }
             }
         }
-        for (int winningPattern : winners) {
+        for (int winningPattern : winningCombos) {
             if ((pattern & winningPattern) == winningPattern) return true;
         }
         return false;
