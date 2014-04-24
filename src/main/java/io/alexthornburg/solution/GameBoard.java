@@ -177,7 +177,7 @@ public class GameBoard {
     private boolean checkColumn(String xOrO) {
         if (checkWin(xOrO, row1.getA(), row2.getA(), row3.getA()))
             return true;
-        if (checkWin(xOrO, row1.getB(), row2.getB(), row2.getB()))
+        if (checkWin(xOrO, row1.getB(), row2.getB(), row3.getB()))
             return true;
         if (checkWin(xOrO, row1.getC(), row2.getC(), row3.getC()))
             return true;
