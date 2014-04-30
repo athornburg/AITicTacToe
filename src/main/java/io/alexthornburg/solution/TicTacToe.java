@@ -14,7 +14,7 @@ public class TicTacToe {
         GameBoard board = GameBoard.getInstance();
         board.initBoard();
 
-        Opponent opponent = new Opponent("O","X");
+        Opponent opponent = new Opponent();
         System.out.println(board.toString());
 
 
@@ -37,16 +37,20 @@ public class TicTacToe {
             opponent.setHardMode(false);
         }
 
-        System.out.println("You're X");
-
         System.out.println("After the coinflip...");
 
         double coinFlip = Math.random();
         boolean compWentFirst = false;
         if(coinFlip<.5){
+            System.out.println("You're X");
+            opponent.setBadGuy("X");
+            opponent.setGoodGuy("O");
             System.out.println("It's your move!");
-           userMakePlay(board,sc);
+           userMakePlay(board,sc,opponent);
         }else{
+            System.out.println("You're O");
+            opponent.setBadGuy("O");
+            opponent.setGoodGuy("X");
             System.out.println("Its my move!");
             computerMakePlay(board,opponent);
             compWentFirst = true;
@@ -55,14 +59,14 @@ public class TicTacToe {
         while(true){
 
         if(compWentFirst){
-            userMakePlay(board,sc);
+            userMakePlay(board,sc,opponent);
             if(!board.getStatus().equals("in progress")) break;
             computerMakePlay(board,opponent);
 
         }else{
             computerMakePlay(board,opponent);
             if(!board.getStatus().equals("in progress")) break;
-            userMakePlay(board,sc);
+            userMakePlay(board,sc,opponent);
         }
             if(!board.getStatus().equals("in progress")) break;
         }
@@ -95,16 +99,16 @@ public class TicTacToe {
 
     }
 
-    public static void userMakePlay(GameBoard board, Scanner sc){
+    public static void userMakePlay(GameBoard board, Scanner sc,Opponent opponent){
         System.out.println("Enter a position:");
         String position = sc.nextLine();
         boolean validMove;
         while(true){
-            validMove = board.processMove(moveToInteger(position),"X");
+            validMove = board.processMove(moveToInteger(position),opponent.getBadGuy());
             if(validMove)break;
             System.out.println("Try again: ");
             String position1 = sc.nextLine();
-            validMove = board.processMove(moveToInteger(position1),"X");
+            validMove = board.processMove(moveToInteger(position1),opponent.getBadGuy());
             if(validMove)break;
 
         }
@@ -114,7 +118,7 @@ public class TicTacToe {
 
     public static void computerMakePlay(GameBoard board, Opponent opponent){
 
-        board.processMove(opponent.getBestMove(board),"O");
+        board.processMove(opponent.getBestMove(board),opponent.getGoodGuy());
         System.out.println(board.toString());
 
     }

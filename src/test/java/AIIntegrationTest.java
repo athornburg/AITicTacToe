@@ -18,7 +18,9 @@ public class AIIntegrationTest {
     @Before
     public void setup(){
        board = GameBoard.getInstance();
-       opponent = new Opponent("O","X");
+       opponent = new Opponent();
+       opponent.setGoodGuy("O");
+       opponent.setBadGuy("X");
        board.initBoard();
 
     }
@@ -51,7 +53,9 @@ public class AIIntegrationTest {
     public void neverLoseStressTest(){
         long start = System.currentTimeMillis();
         opponent.setHardMode(true);
-        Opponent opponent1 = new Opponent("X","O");
+        Opponent opponent1 = new Opponent();
+        opponent1.setGoodGuy("X");
+        opponent1.setBadGuy("O");
         opponent1.setHardMode(false);
         double winPercentage=0;
         double drawPercentage=0;
@@ -91,7 +95,9 @@ public class AIIntegrationTest {
     public void showDownStressTest(){
         long start = System.currentTimeMillis();
         opponent.setHardMode(true);
-        Opponent opponent1 = new Opponent("X","O");
+        Opponent opponent1 = new Opponent();
+        opponent1.setGoodGuy("X");
+        opponent1.setBadGuy("O");
         opponent1.setHardMode(true);
         double winPercentage=0;
         double drawPercentage=0;
