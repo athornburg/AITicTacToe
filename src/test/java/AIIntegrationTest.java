@@ -1,3 +1,4 @@
+import com.jakewharton.fliptables.FlipTable;
 import io.alexthornburg.solution.GameBoard;
 import io.alexthornburg.solution.Opponent;
 import org.junit.After;
@@ -60,11 +61,10 @@ public class AIIntegrationTest {
         double winPercentage=0;
         double drawPercentage=0;
         double lossPercentage=0;
-        for(int i=0;i<10000;i++){
+        for(int i=0;i<1000;i++){
             while(true){
                 board.processMove(opponent1.getBestMove(board),"X");
                 board.processMove(opponent.getBestMove(board),"O");
-
                 if(!board.getStatus().equals("in progress")){
                     break;
                 }
@@ -82,10 +82,10 @@ public class AIIntegrationTest {
             board.initBoard();
         }
         System.out.println("==========Random Guy Percentages==========");
-        System.out.println("Win percent: "+winPercentage/10000*100);
-        System.out.println("Draw percent: "+drawPercentage/10000*100);
-        System.out.println("Loss percent: "+lossPercentage/10000*100);
-        assertEquals(0.0,lossPercentage/10000*100);
+        System.out.println("Win percent: "+winPercentage/1000*100);
+        System.out.println("Draw percent: "+drawPercentage/1000*100);
+        System.out.println("Loss percent: "+lossPercentage/1000*100);
+        assertEquals(0.0,lossPercentage/1000*100);
         long end = System.currentTimeMillis();
         long time = end-start;
         System.out.println("10,000 rando's played in "+time+" milliseconds");
@@ -133,6 +133,12 @@ public class AIIntegrationTest {
         long time = end-start;
         System.out.println("10,000 AI players played in "+time+" milliseconds");
 
+    }
+
+    public static void printBoard(GameBoard board){
+        String[] headers = { "A", "B","C" };
+        String [][]body = board.getBoardAs2D();
+        System.out.println(FlipTable.of(headers, body));
     }
 
     @After

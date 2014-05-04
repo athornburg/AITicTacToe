@@ -39,15 +39,15 @@ public class GamePlayTest {
     public void testOpenMoves(){
         board.initBoard();
         board.processMove(0,"O");
-        assertEquals("O",board.getRow1().getA());
+        assertEquals("O",board.getBoardAs2D()[0][0]);
         board.processMove(1,"X");
-        assertEquals("X",board.getRow1().getB());
+        assertEquals("X",board.getBoardAs2D()[0][1]);
         board.processMove(2,"O");
-        assertEquals("O",board.getRow1().getC());
+        assertEquals("O",board.getBoardAs2D()[0][2]);
         board.processMove(3,"X");
-        assertEquals("X",board.getRow2().getA());
+        assertEquals("X",board.getBoardAs2D()[1][0]);
         board.processMove(4,"O");
-        assertEquals("O",board.getRow2().getB());
+        assertEquals("O",board.getBoardAs2D()[1][1]);
         ArrayList<Integer> openMoves = board.listAvailableMoves();
         assertTrue(openMoves.contains(5));
         assertTrue(openMoves.contains(6));
@@ -61,9 +61,9 @@ public class GamePlayTest {
     public void testWin(){
         board.initBoard();
         board.processMove(0, "X");
-        assertEquals("X", board.getRow1().getA());
+        assertEquals("X", board.getBoardAs2D()[0][0]);
         board.processMove(1, "X");
-        assertEquals("X", board.getRow1().getB());
+        assertEquals("X", board.getBoardAs2D()[0][1]);
         board.processMove(2, "X");
         assertEquals("X wins!", board.getStatus());
         assertTrue(board.isWinner("X"));
@@ -78,23 +78,23 @@ public class GamePlayTest {
 
     public void fillBoardWithX(){
         board.processMove(0,"X");
-        assertEquals("X",board.getRow1().getA());
+        assertEquals("X",board.getBoardAs2D()[0][0]);
         board.processMove(1,"X");
-        assertEquals("X",board.getRow1().getB());
+        assertEquals("X",board.getBoardAs2D()[0][1]);
         board.processMove(2,"X");
-        assertEquals("X",board.getRow1().getC());
+        assertEquals("X",board.getBoardAs2D()[0][2]);
         board.processMove(3,"X");
-        assertEquals("X",board.getRow2().getA());
+        assertEquals("X",board.getBoardAs2D()[1][0]);
         board.processMove(4,"X");
-        assertEquals("X",board.getRow2().getB());
+        assertEquals("X",board.getBoardAs2D()[1][1]);
         board.processMove(5,"X");
-        assertEquals("X",board.getRow2().getC());
+        assertEquals("X",board.getBoardAs2D()[1][2]);
         board.processMove(6,"X");
-        assertEquals("X",board.getRow3().getA());
+        assertEquals("X",board.getBoardAs2D()[2][0]);
         board.processMove(7,"X");
-        assertEquals("X",board.getRow3().getB());
+        assertEquals("X",board.getBoardAs2D()[2][1]);
         board.processMove(8,"X");
-        assertEquals("X",board.getRow3().getC());
+        assertEquals("X",board.getBoardAs2D()[2][2]);
     }
 
 }

@@ -1,4 +1,7 @@
 package io.alexthornburg.solution;
+
+import com.jakewharton.fliptables.FlipTable;
+
 import java.util.Scanner;
 /**
  * User: alexthornburg
@@ -9,13 +12,15 @@ public class TicTacToe {
 
     public static void main(String args[]){
         GameBoard example = GameBoard.getInstance();
-        System.out.println("Positions: \n"+example.exampleBoard().toString());
+        System.out.println("Positions: \n");
+        example.exampleBoard();
+        printBoard(example);
 
         GameBoard board = GameBoard.getInstance();
         board.initBoard();
 
         Opponent opponent = new Opponent();
-        System.out.println(board.toString());
+        printBoard(board);
 
 
 
@@ -112,15 +117,22 @@ public class TicTacToe {
             if(validMove)break;
 
         }
-        System.out.println(board.toString());
+        printBoard(board);
 
     }
 
     public static void computerMakePlay(GameBoard board, Opponent opponent){
+        int move = opponent.getBestMove(board);
+        board.processMove(move,opponent.getGoodGuy());
+        System.out.println(board.boardArray[move]);
+        printBoard(board);
 
-        board.processMove(opponent.getBestMove(board),opponent.getGoodGuy());
-        System.out.println(board.toString());
+    }
 
+    public static void printBoard(GameBoard board){
+        String[] headers = { "A", "B","C" };
+        String [][]body = board.getBoardAs2D();
+        System.out.println(FlipTable.of(headers, body));
     }
 
 }

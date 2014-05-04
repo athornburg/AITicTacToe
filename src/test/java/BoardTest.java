@@ -21,15 +21,15 @@ public class BoardTest {
 
     @Test
     public void testInit(){
-        assertEquals("_", board.getRow1().getA());
-        assertEquals("_",board.getRow1().getB());
-        assertEquals("_",board.getRow1().getC());
-        assertEquals("_",board.getRow2().getA());
-        assertEquals("_",board.getRow2().getB());
-        assertEquals("_",board.getRow2().getC());
-        assertEquals("_",board.getRow3().getA());
-        assertEquals("_",board.getRow3().getB());
-        assertEquals("_",board.getRow3().getC());
+        assertEquals("_", board.getBoardAs2D()[0][0]);
+        assertEquals("_",board.getBoardAs2D()[0][1]);
+        assertEquals("_",board.getBoardAs2D()[0][2]);
+        assertEquals("_",board.getBoardAs2D()[1][0]);
+        assertEquals("_",board.getBoardAs2D()[1][1]);
+        assertEquals("_",board.getBoardAs2D()[1][2]);
+        assertEquals("_",board.getBoardAs2D()[2][0]);
+        assertEquals("_",board.getBoardAs2D()[2][1]);
+        assertEquals("_",board.getBoardAs2D()[2][2]);
     }
 
     @Test
@@ -62,9 +62,9 @@ public class BoardTest {
     public void testWin(){
         board.initBoard();
         board.processMove(0, "X");
-        assertEquals("X", board.getRow1().getA());
+        assertEquals("X", board.getBoardAsArray()[0]);
         board.processMove(1, "X");
-        assertEquals("X", board.getRow1().getB());
+        assertEquals("X", board.getBoardAsArray()[1]);
         board.processMove(2, "X");
         assertEquals("X wins!", board.getStatus());
         assertTrue(board.isWinner("X"));
