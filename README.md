@@ -14,3 +14,8 @@ Building
 ```
 mvn clean install
 ```
+To run without building tests
+```
+mvn exec:java
+```
+

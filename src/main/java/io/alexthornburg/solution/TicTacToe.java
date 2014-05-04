@@ -1,4 +1,7 @@
 package io.alexthornburg.solution;
+
+import com.jakewharton.fliptables.FlipTable;
+
 import java.util.Scanner;
 /**
  * User: alexthornburg
@@ -9,13 +12,15 @@ public class TicTacToe {
 
     public static void main(String args[]){
         GameBoard example = GameBoard.getInstance();
-        System.out.println("Positions: \n"+example.exampleBoard().toString());
+        System.out.println("Positions: \n");
+        example.exampleBoard();
+        printBoard(example);
 
         GameBoard board = GameBoard.getInstance();
         board.initBoard();
 
-        Opponent opponent = new Opponent("O","X");
-        System.out.println(board.toString());
+        Opponent opponent = new Opponent();
+        printBoard(board);
 
 
 
@@ -37,16 +42,20 @@ public class TicTacToe {
             opponent.setHardMode(false);
         }
 
-        System.out.println("You're X");
-
         System.out.println("After the coinflip...");
 
         double coinFlip = Math.random();
         boolean compWentFirst = false;
         if(coinFlip<.5){
+            System.out.println("You're X");
+            opponent.setBadGuy("X");
+            opponent.setGoodGuy("O");
             System.out.println("It's your move!");
-           userMakePlay(board,sc);
+           userMakePlay(board,sc,opponent);
         }else{
+            System.out.println("You're O");
+            opponent.setBadGuy("O");
+            opponent.setGoodGuy("X");
             System.out.println("Its my move!");
             computerMakePlay(board,opponent);
             compWentFirst = true;
@@ -55,14 +64,14 @@ public class TicTacToe {
         while(true){
 
         if(compWentFirst){
-            userMakePlay(board,sc);
+            userMakePlay(board,sc,opponent);
             if(!board.getStatus().equals("in progress")) break;
             computerMakePlay(board,opponent);
 
         }else{
             computerMakePlay(board,opponent);
             if(!board.getStatus().equals("in progress")) break;
-            userMakePlay(board,sc);
+            userMakePlay(board,sc,opponent);
         }
             if(!board.getStatus().equals("in progress")) break;
         }
@@ -95,28 +104,34 @@ public class TicTacToe {
 
     }
 
-    public static void userMakePlay(GameBoard board, Scanner sc){
+    public static void userMakePlay(GameBoard board, Scanner sc,Opponent opponent){
         System.out.println("Enter a position:");
         String position = sc.nextLine();
         boolean validMove;
         while(true){
-            validMove = board.processMove(moveToInteger(position),"X");
+            validMove = board.processMove(moveToInteger(position),opponent.getBadGuy());
             if(validMove)break;
             System.out.println("Try again: ");
             String position1 = sc.nextLine();
-            validMove = board.processMove(moveToInteger(position1),"X");
+            validMove = board.processMove(moveToInteger(position1),opponent.getBadGuy());
             if(validMove)break;
 
         }
-        System.out.println(board.toString());
+        printBoard(board);
 
     }
 
     public static void computerMakePlay(GameBoard board, Opponent opponent){
+        int move = opponent.getBestMove(board);
+        board.processMove(move,opponent.getGoodGuy());
+        printBoard(board);
 
-        board.processMove(opponent.getBestMove(board),"O");
-        System.out.println(board.toString());
+    }
 
+    public static void printBoard(GameBoard board){
+        String[] headers = { "A", "B","C" };
+        String [][]body = board.getBoardAs2D();
+        System.out.println(FlipTable.of(headers, body));
     }
 
 }

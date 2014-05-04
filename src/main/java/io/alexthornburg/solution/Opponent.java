@@ -13,8 +13,25 @@ public class Opponent {
     private boolean hardMode;
     private GameBoard board;
     protected String[][] cells;
-    private String goodGuy ="0";
-    private String badGuy = "X";
+    private String goodGuy;
+    private String badGuy;
+
+    public void setGoodGuy(String goodGuy){
+        this.goodGuy = goodGuy;
+    }
+
+    public String getGoodGuy(){
+        return goodGuy;
+    }
+
+    public void setBadGuy(String badGuy){
+        this.badGuy = badGuy;
+    }
+
+    public String getBadGuy(){
+        return badGuy;
+    }
+
     public int[] winningCombos = {
             Integer.parseInt("111000000",2), Integer.parseInt("000111000",2),
             Integer.parseInt("000000111",2),
@@ -23,9 +40,7 @@ public class Opponent {
             Integer.parseInt("100010001",2), Integer.parseInt("001010100",2)
     };
 
-    public Opponent(String goodGuy,String badGuy){
-        this.goodGuy = goodGuy;
-        this.badGuy = badGuy;
+    public Opponent(){
     }
 
 
