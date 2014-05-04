@@ -53,7 +53,6 @@ public class GameBoard {
     }
 
     public boolean processMove(int move,String xOrO){
-        System.out.println(move);
         if(!boardArray[move].equals("_")){
             return false;
         }else{

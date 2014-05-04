@@ -124,7 +124,6 @@ public class TicTacToe {
     public static void computerMakePlay(GameBoard board, Opponent opponent){
         int move = opponent.getBestMove(board);
         board.processMove(move,opponent.getGoodGuy());
-        System.out.println(board.boardArray[move]);
         printBoard(board);
 
     }
