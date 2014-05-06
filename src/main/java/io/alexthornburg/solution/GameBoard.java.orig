@@ -109,7 +109,11 @@ public class GameBoard {
     private boolean checkColumn(String xOrO) {
         if (checkWin(xOrO, boardArray[0], boardArray[3], boardArray[6]))
             return true;
+<<<<<<< HEAD
+        if (checkWin(xOrO, row1.getB(), row2.getB(), row3.getB()))
+=======
         if (checkWin(xOrO, boardArray[1], boardArray[4], boardArray[7]))
+>>>>>>> revisions
             return true;
         if (checkWin(xOrO, boardArray[2], boardArray[5], boardArray[8]))
             return true;

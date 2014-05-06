@@ -19,7 +19,7 @@ public class TicTacToe {
         GameBoard board = GameBoard.getInstance();
         board.initBoard();
 
-        Opponent opponent = new Opponent();
+        Opponent opponent = new Opponent(board);
         printBoard(board);
 
 

@@ -40,7 +40,9 @@ public class Opponent {
             Integer.parseInt("100010001",2), Integer.parseInt("001010100",2)
     };
 
-    public Opponent(){
+    public Opponent(GameBoard board){
+        cells = board.getBoardAs2D();
+        this.board = board;
     }
 
 
@@ -86,8 +88,8 @@ public class Opponent {
 
     public int getBestMove(GameBoard board) {
         this.board = board;
+        cells = this.board.getBoardAs2D();
         if(hardMode){
-            cells = board.getBoardAs2D();
             int[] result = prunedMiniMax(goodGuy, Integer.MIN_VALUE, Integer.MAX_VALUE, 2);
             if(result[1]==0){
                 return result[2];
@@ -97,9 +99,9 @@ public class Opponent {
                 return result[2]+6;
             }
         }else{
-            ArrayList<Integer> moves = board.listAvailableMoves();
-            Random pic = new Random();
-            int i = pic.nextInt(moves.size());
+            ArrayList<Integer> moves = this.board.listAvailableMoves();
+            Random pick = new Random();
+            int i = pick.nextInt(moves.size());
             return moves.get(i);
         }
     }

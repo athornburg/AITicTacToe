@@ -19,7 +19,7 @@ public class AIIntegrationTest {
     @Before
     public void setup(){
        board = GameBoard.getInstance();
-       opponent = new Opponent();
+       opponent = new Opponent(board);
        opponent.setGoodGuy("O");
        opponent.setBadGuy("X");
        board.initBoard();
@@ -54,14 +54,14 @@ public class AIIntegrationTest {
     public void neverLoseStressTest(){
         long start = System.currentTimeMillis();
         opponent.setHardMode(true);
-        Opponent opponent1 = new Opponent();
+        Opponent opponent1 = new Opponent(board);
         opponent1.setGoodGuy("X");
         opponent1.setBadGuy("O");
         opponent1.setHardMode(false);
         double winPercentage=0;
         double drawPercentage=0;
         double lossPercentage=0;
-        for(int i=0;i<1000;i++){
+        for(int i=0;i<10000;i++){
             while(true){
                 board.processMove(opponent1.getBestMove(board),"X");
                 board.processMove(opponent.getBestMove(board),"O");
@@ -76,16 +76,18 @@ public class AIIntegrationTest {
                 drawPercentage++;
             }
             if(board.getStatus().equals("X wins!")){
+                printBoard(board);
                 lossPercentage++;
             }
             assertNotSame("X wins!",board.getStatus());
+
             board.initBoard();
         }
         System.out.println("==========Random Guy Percentages==========");
-        System.out.println("Win percent: "+winPercentage/1000*100);
-        System.out.println("Draw percent: "+drawPercentage/1000*100);
-        System.out.println("Loss percent: "+lossPercentage/1000*100);
-        assertEquals(0.0,lossPercentage/1000*100);
+        System.out.println("Win percent: "+winPercentage/10000*100);
+        System.out.println("Draw percent: "+drawPercentage/10000*100);
+        System.out.println("Loss percent: "+lossPercentage/10000*100);
+        assertEquals(0.0,lossPercentage/10000*100);
         long end = System.currentTimeMillis();
         long time = end-start;
         System.out.println("10,000 rando's played in "+time+" milliseconds");
@@ -95,7 +97,7 @@ public class AIIntegrationTest {
     public void showDownStressTest(){
         long start = System.currentTimeMillis();
         opponent.setHardMode(true);
-        Opponent opponent1 = new Opponent();
+        Opponent opponent1 = new Opponent(board);
         opponent1.setGoodGuy("X");
         opponent1.setBadGuy("O");
         opponent1.setHardMode(true);
