@@ -14,8 +14,12 @@ Building
 ```
 mvn clean install
 ```
-To run without building tests
+To run without re-building
 ```
 mvn exec:java
+```
+To re-build without tests
+```
+mvn clean install -Dmaven.test.skip=true
 ```
 
