@@ -54,8 +54,8 @@ public abstract class Player {
 
     public boolean isAWinner(String player) {
         int pattern = Integer.parseInt("000000000",2);
-        for (int row = 0; row < 3; ++row) {
-            for (int col = 0; col < 3; ++col) {
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
                 if (cells[row][col] == player) {
                     pattern |= (1 << (row * 3 + col));
                 }

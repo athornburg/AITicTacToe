@@ -164,5 +164,9 @@ public class GameBoard {
         return inprogress;
     }
 
+    public void undoMove(int move){
+        boardArray[move]="_";
+    }
+
 
 }
