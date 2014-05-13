@@ -36,7 +36,7 @@ public class BoardTest {
     public void testStatus(){
         board.initBoard();
         board.processMove(0, "X");
-        assertEquals("in progress",board.getStatus());
+        assertEquals(true,board.isInprogress());
         board.initBoard();
     }
 
@@ -66,7 +66,7 @@ public class BoardTest {
         board.processMove(1, "X");
         assertEquals("X", board.getBoardAsArray()[1]);
         board.processMove(2, "X");
-        assertEquals("X wins!", board.getStatus());
+        assertTrue(board.isXWinner());
         assertTrue(board.isWinner("X"));
         board.initBoard();
     }

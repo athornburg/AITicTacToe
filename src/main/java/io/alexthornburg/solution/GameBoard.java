@@ -10,8 +10,10 @@ import java.util.ArrayList;
 public class GameBoard {
     private static final GameBoard board;
     private static final String EMPTY_VALUE = "_";
-    public String[] boardArray = new String[9];
-    private String status = "in progress";
+    private String[] boardArray = new String[9];
+    private boolean inprogress = true;
+    private boolean xwins = false;
+    private boolean owins = false;
 
     static {
         try {
@@ -30,7 +32,7 @@ public class GameBoard {
     }
 
     public boolean isWinner(String player){
-        if(status.equals(player+ " wins!")) return true;
+        if(xwins || owins) return true;
         return false;
     }
 
@@ -48,12 +50,12 @@ public class GameBoard {
 
     public void initBoard(){
         for(int i=0;i<boardArray.length;i++){
-            boardArray[i]="_";
+            boardArray[i]=EMPTY_VALUE;
         }
     }
 
     public boolean processMove(int move,String xOrO){
-        if(!boardArray[move].equals("_")){
+        if(!boardArray[move].equals(EMPTY_VALUE)){
             return false;
         }else{
             boardArray[move]=xOrO;
@@ -126,11 +128,16 @@ public class GameBoard {
 
     public void update(String xOrO) {
         if (checkRow(xOrO) || checkColumn(xOrO) || checkDiagonal(xOrO)) {
-            status = xOrO +" wins!";
+            inprogress = false;
+            if(xOrO.equals("X")){
+                xwins = true;
+            }else{
+               owins = true;
+            }
         } else if (full()) {
-            status = "draw";
+            inprogress = false;
         } else {
-            status = "in progress";
+            inprogress = true;
         }
 
     }
@@ -138,16 +145,23 @@ public class GameBoard {
     public ArrayList<Integer> listAvailableMoves(){
         ArrayList<Integer> results = new ArrayList<Integer>();
         for(int i=0;i<boardArray.length;i++){
-            if(boardArray[i].equals("_")){
+            if(boardArray[i].equals(EMPTY_VALUE)){
                 results.add(i);
             }
         }
         return results;
     }
 
+    public boolean isXWinner(){
+        return xwins;
+    }
 
-    public String getStatus() {
-        return status;
+    public boolean isOWinner(){
+        return owins;
+    }
+
+    public boolean isInprogress(){
+        return inprogress;
     }
 
 

@@ -1,48 +1,31 @@
 package io.alexthornburg.solution;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * User: alexthornburg
  * Date: 4/10/14
  * Time: 12:22 PM
  */
-public class Opponent {
-    private boolean hardMode;
-    private GameBoard board;
-    protected String[][] cells;
-    private String goodGuy;
-    private String badGuy;
+public class Opponent extends Player{
 
-    public void setGoodGuy(String goodGuy){
-        this.goodGuy = goodGuy;
+    public Opponent(GameBoard board) {
+        super(board);
     }
 
-    public String getGoodGuy(){
-        return goodGuy;
-    }
-
-    public void setBadGuy(String badGuy){
-        this.badGuy = badGuy;
-    }
-
-    public String getBadGuy(){
-        return badGuy;
-    }
-
-    public int[] winningCombos = {
-            Integer.parseInt("111000000",2), Integer.parseInt("000111000",2),
-            Integer.parseInt("000000111",2),
-            Integer.parseInt("100100100",2), Integer.parseInt("010010010",2),
-            Integer.parseInt("001001001",2),
-            Integer.parseInt("100010001",2), Integer.parseInt("001010100",2)
-    };
-
-    public Opponent(GameBoard board){
-        cells = board.getBoardAs2D();
+    @Override
+    public int makeAMove(GameBoard board) {
         this.board = board;
+        cells = this.board.getBoardAs2D();
+        int[] result = prunedMiniMax(goodGuy, Integer.MIN_VALUE, Integer.MAX_VALUE, 2);
+        if(result[1]==0){
+            return result[2];
+        }else if(result[1] == 1){
+            return result[2]+3;
+        }else{
+            return result[2]+6;
+        }
+
     }
 
 
@@ -85,43 +68,6 @@ public class Opponent {
         }
     }
 
-
-    public int getBestMove(GameBoard board) {
-        this.board = board;
-        cells = this.board.getBoardAs2D();
-        if(hardMode){
-            int[] result = prunedMiniMax(goodGuy, Integer.MIN_VALUE, Integer.MAX_VALUE, 2);
-            if(result[1]==0){
-                return result[2];
-            }else if(result[1] == 1){
-                return result[2]+3;
-            }else{
-                return result[2]+6;
-            }
-        }else{
-            ArrayList<Integer> moves = this.board.listAvailableMoves();
-            Random pick = new Random();
-            int i = pick.nextInt(moves.size());
-            return moves.get(i);
-        }
-    }
-
-    public List<int[]> getOpenSpots() {
-        List<int[]> nextMoves = new ArrayList<int[]>();
-        if (isAWinner(goodGuy) || isAWinner(badGuy)) {
-            return nextMoves;
-        }
-
-        for (int row = 0; row < 3; ++row) {
-            for (int col = 0; col < 3; ++col) {
-                if (cells[row][col] == "_") {
-                    nextMoves.add(new int[] {row, col});
-                }
-            }
-        }
-        return nextMoves;
-    }
-
     public int heuristic() {
         int score = 0;
         score += check(0, 0, 0, 1, 0, 2);
@@ -135,24 +81,17 @@ public class Opponent {
         return score;
     }
 
-    public boolean isHardMode() {
-        return hardMode;
-    }
-
-    public void setHardMode(boolean hardMode) {
-        this.hardMode = hardMode;
-    }
-
-    public int check(int row1, int col1, int row2, int col2, int row3, int col3) {
-        int score = 0;
-
-
+    public int checkFirstCell(int row1,int col1,int score){
         if (cells[row1][col1] == goodGuy) {
             score = 1;
         } else if (cells[row1][col1] == badGuy) {
             score = -1;
         }
+        return score;
 
+    }
+
+    public int checkSecondCell(int row2,int col2,int score){
         if (cells[row2][col2] == goodGuy) {
             if (score == 1) {
                 score = 10;
@@ -170,8 +109,10 @@ public class Opponent {
                 score = -1;
             }
         }
+        return score;
+    }
 
-
+    public int checkThirdCell(int row3,int col3,int score){
         if (cells[row3][col3] == goodGuy) {
             if (score > 0) {
                 score *= 10;
@@ -192,19 +133,16 @@ public class Opponent {
         return score;
     }
 
-    public boolean isAWinner(String player) {
-        int pattern = Integer.parseInt("000000000",2);
-        for (int row = 0; row < 3; ++row) {
-            for (int col = 0; col < 3; ++col) {
-                if (cells[row][col] == player) {
-                    pattern |= (1 << (row * 3 + col));
-                }
-            }
-        }
-        for (int winningPattern : winningCombos) {
-            if ((pattern & winningPattern) == winningPattern) return true;
-        }
-        return false;
+    public int check(int row1, int col1, int row2, int col2, int row3, int col3) {
+        int score = 0;
+
+        score = checkFirstCell(row1,col1,score);
+
+        score = checkSecondCell(row2,col2,score);
+
+        score = checkThirdCell(row3,col3,score);
+
+        return score;
     }
 
 }

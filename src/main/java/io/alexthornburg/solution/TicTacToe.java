@@ -19,9 +19,10 @@ public class TicTacToe {
         GameBoard board = GameBoard.getInstance();
         board.initBoard();
 
-        Opponent opponent = new Opponent(board);
+        Player opponent;
         printBoard(board);
 
+        Player human = new Human(board);
 
 
         Scanner sc = new Scanner(System.in);
@@ -36,10 +37,10 @@ public class TicTacToe {
             }
 
         }
-        if(hard.equals("Y")){
-            opponent.setHardMode(true);
-        }else if(hard.equals("N")){
-            opponent.setHardMode(false);
+        if(hard.toUpperCase().equals("Y")){
+            opponent = new Opponent(board);
+        }else{
+            opponent = new EasyOpponent(board);
         }
 
         System.out.println("After the coinflip...");
@@ -51,7 +52,7 @@ public class TicTacToe {
             opponent.setBadGuy("X");
             opponent.setGoodGuy("O");
             System.out.println("It's your move!");
-           userMakePlay(board,sc,opponent);
+           userMakePlay(human,board,sc,opponent);
         }else{
             System.out.println("You're O");
             opponent.setBadGuy("O");
@@ -64,56 +65,41 @@ public class TicTacToe {
         while(true){
 
         if(compWentFirst){
-            userMakePlay(board,sc,opponent);
-            if(!board.getStatus().equals("in progress")) break;
+            userMakePlay(human,board,sc,opponent);
+            if(!board.isInprogress()) break;
             computerMakePlay(board,opponent);
 
         }else{
             computerMakePlay(board,opponent);
-            if(!board.getStatus().equals("in progress")) break;
-            userMakePlay(board,sc,opponent);
+            if(!board.isInprogress()) break;
+            userMakePlay(human,board,sc,opponent);
         }
-            if(!board.getStatus().equals("in progress")) break;
+            if(!board.isInprogress()) break;
         }
-        System.out.println(board.getStatus());
-
-    }
-
-    public static int moveToInteger(String move){
-        if(move.equals("A1")){
-            return 0;
-        }else if(move.equals("B1")){
-            return 1;
-        }else if(move.equals("C1")){
-            return 2;
-        }else if(move.equals("A2")){
-            return 3;
-        }else if(move.equals("B2")){
-            return 4;
-        }else if(move.equals("C2")){
-            return 5;
-        }else if(move.equals("A3")){
-            return 6;
-        }else if(move.equals("B3")){
-            return 7;
-        }else if(move.equals("C3")){
-            return 8;
+        if(board.isOWinner()){
+            System.out.println("O wins");
+        }else if(board.isXWinner()){
+            System.out.println("X wins");
+        }else if(board.isInprogress()){
+            System.out.println("In progress");
         }else{
-            return 100;
+            System.out.println("Draw");
         }
 
     }
 
-    public static void userMakePlay(GameBoard board, Scanner sc,Opponent opponent){
+    public static void userMakePlay(Player human, GameBoard board, Scanner sc,Player opponent){
         System.out.println("Enter a position:");
         String position = sc.nextLine();
         boolean validMove;
         while(true){
-            validMove = board.processMove(moveToInteger(position),opponent.getBadGuy());
+            human.setMove(position);
+            validMove = board.processMove(human.makeAMove(board),opponent.getBadGuy());
             if(validMove)break;
             System.out.println("Try again: ");
             String position1 = sc.nextLine();
-            validMove = board.processMove(moveToInteger(position1),opponent.getBadGuy());
+            human.setMove(position1);
+            validMove = board.processMove(human.makeAMove(board),opponent.getBadGuy());
             if(validMove)break;
 
         }
@@ -121,8 +107,8 @@ public class TicTacToe {
 
     }
 
-    public static void computerMakePlay(GameBoard board, Opponent opponent){
-        int move = opponent.getBestMove(board);
+    public static void computerMakePlay(GameBoard board, Player opponent){
+        int move = opponent.makeAMove(board);
         board.processMove(move,opponent.getGoodGuy());
         printBoard(board);
 

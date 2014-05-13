@@ -65,7 +65,7 @@ public class GamePlayTest {
         board.processMove(1, "X");
         assertEquals("X", board.getBoardAs2D()[0][1]);
         board.processMove(2, "X");
-        assertEquals("X wins!", board.getStatus());
+        assertTrue(board.isXWinner());
         assertTrue(board.isWinner("X"));
         board.initBoard();
     }
